@@ -225,5 +225,7 @@ return [
         ],
 
     ],
-
+    'column_toggle' => [
+        'heading' => 'Oszlopok',
+    ],
 ];

@@ -11,6 +11,7 @@ class CreateDeviceType extends CreateRecord
     protected static string $resource = DeviceTypeResource::class;
 
     protected function getRedirectUrl(): string
-{
-return $this->getResource()::getUrl('index');}
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

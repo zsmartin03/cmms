@@ -2,5 +2,14 @@
 return [
     'name' => 'Name',
     'note' => 'Note',
-    'created_at' => 'Created at'
+    'created_at' => 'Created at',
+    'yes' => 'Yes',
+    'no' => 'No',
+    'erp_code' => 'ERP code',
+    'plant' => 'Plant',
+    'history' => 'History',
+    'type' => 'Type',
+    'active' => 'Active',
+    'all' => 'All',
+    'inactive' => 'Inactive'
 ];

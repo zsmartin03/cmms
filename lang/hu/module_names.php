@@ -7,4 +7,8 @@ return [
         'label' => 'Berendezés típus',
         'plural_label' => 'Berendezés típusok',
     ],
+    'devices' => [
+        'label' => 'Berendezés',
+        'plural_label' => 'Berendezések',
+    ],
 ];
