@@ -11,5 +11,6 @@ return [
     'type' => 'Típus',
     'active' => 'Aktív',
     'all' => 'Összes',
-    'inactive' => 'Inaktív'
+    'inactive' => 'Inaktív',
+    'qr_code' => 'QR kód'
 ];

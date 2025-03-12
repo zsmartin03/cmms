@@ -11,5 +11,6 @@ return [
     'type' => 'Type',
     'active' => 'Active',
     'all' => 'All',
-    'inactive' => 'Inactive'
+    'inactive' => 'Inactive',
+    'qr_code' => 'QR code',
 ];
