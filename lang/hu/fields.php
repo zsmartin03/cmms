@@ -12,5 +12,6 @@ return [
     'active' => 'Aktív',
     'all' => 'Összes',
     'inactive' => 'Inaktív',
-    'qr_code' => 'QR kód'
+    'qr_code' => 'QR kód',
+    'attachment' => 'Csatolt fájl'
 ];
