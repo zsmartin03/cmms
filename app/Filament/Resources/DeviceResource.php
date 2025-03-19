@@ -22,11 +22,11 @@ class DeviceResource extends Resource
     protected static ?string $model = Device::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-wrench';
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 5;
 
     public static function getNavigationGroup(): string
     {
-        return __('module_names.navigation_groups.administration');
+        return __('module_names.navigation_groups.maintenance');
     }
     public static function getModelLabel(): string
     {

@@ -8,9 +8,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Filament\Panel;
 use Filament\Models\Contracts\FilamentUser;
+use Spatie\Permission\Traits\HasRoles;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements FilamentUser
 {
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
     public function canAccessPanel(Panel $panel): bool
     {
         return str_ends_with($this->email, '@a.com');
