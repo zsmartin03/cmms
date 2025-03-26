@@ -13,5 +13,9 @@ return [
     'all' => 'Összes',
     'inactive' => 'Inaktív',
     'qr_code' => 'QR kód',
-    'attachment' => 'Csatolt fájl'
+    'attachment' => 'Csatolt fájl',
+    'password' => 'Jelszó',
+    'new_password' => 'Új Jelszó',
+    'deleted_at' => 'Törölve',
+    'email' => 'Email',
 ];

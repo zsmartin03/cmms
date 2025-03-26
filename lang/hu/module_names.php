@@ -43,4 +43,20 @@ return [
 
     ],
 
+    'roles' => [
+        'label' => 'Szerepkör',
+
+        'plural_label' => 'Szerepkörök',
+    ],
+
+    'users' => [
+        'label' => 'Felhasználó',
+
+        'plural_label' => 'Felhasználók',
+    ],
+
+    'widgets' => [
+        'usersbyroles' => 'Felhasználók szerepkörök szerint',
+    ],
+
 ];

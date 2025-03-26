@@ -42,5 +42,22 @@ return [
         'plural_label' => 'Permissions',
 
     ],
+    'roles' => [
+        'label' => 'Role',
+
+        'plural_label' => 'Roles',
+
+    ],
+
+    'users' => [
+        'label' => 'User',
+
+        'plural_label' => 'Users',
+    ],
+
+
+    'widgets' => [
+        'usersbyroles' => 'Users by role',
+    ],
 
 ];

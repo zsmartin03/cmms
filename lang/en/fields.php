@@ -13,5 +13,9 @@ return [
     'all' => 'All',
     'inactive' => 'Inactive',
     'qr_code' => 'QR code',
-    'attachment' => 'Attachment'
+    'attachment' => 'Attachment',
+    'password' => 'Password',
+    'new_password' => 'New Password',
+    'deleted_at' => 'Deleted at',
+    'email' => 'Email',
 ];
