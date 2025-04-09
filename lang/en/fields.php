@@ -17,5 +17,11 @@ return [
     'password' => 'Password',
     'new_password' => 'New Password',
     'deleted_at' => 'Deleted at',
+    'attachments' => 'Attachments(s)',
     'email' => 'Email',
+    'description' => 'Description',
+    'priority' => 'Priority',
+    'repairer' => 'Repairer',
+    'due_date' => 'Due date',
+    'finish_date' => 'Finish date',
 ];

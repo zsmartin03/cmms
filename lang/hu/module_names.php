@@ -8,8 +8,15 @@ return [
 
         'maintenance' => 'Karbantartás',
 
+        'failure_report' => 'Hibabejelentés'
+
     ],
 
+    'worksheets' => [
+        'label' => 'Munkalap',
+
+        'plural_label' => 'Munkalapok',
+    ],
     'device_types' => [
 
         'label' => 'Berendezés típus',

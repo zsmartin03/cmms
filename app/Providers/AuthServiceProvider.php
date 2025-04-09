@@ -31,11 +31,11 @@ class AuthServiceProvider extends ServiceProvider
         Role::class => RolePolicy::class,
         User::class => UserPolicy::class,
 
-        //   DeviceType::class => DeviceTypePolicy::class,
-        //  Device::class => DevicePolicy::class,
-        //  Document::class => DocumentPolicy::class,
+        DeviceType::class => DeviceTypePolicy::class,
+        Device::class => DevicePolicy::class,
+        Document::class => DocumentPolicy::class,
 
-        //  Worksheet::class => WorksheetPolicy::class,
+        Worksheet::class => WorksheetPolicy::class,
     ];
 
     /**

@@ -8,6 +8,12 @@ return [
 
         'maintenance' => 'Maintenance',
 
+        'failure_report' => 'Failure report'
+
+    ],
+
+    'worksheets' => [
+        'label' => 'Label'
     ],
 
     'device_types' => [
