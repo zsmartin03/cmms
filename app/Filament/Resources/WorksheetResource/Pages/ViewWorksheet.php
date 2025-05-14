@@ -9,4 +9,11 @@ use Filament\Resources\Pages\ViewRecord;
 class ViewWorksheet extends ViewRecord
 {
     protected static string $resource = WorksheetResource::class;
+
+    protected function getFooterWidgets(): array
+    {
+        return [
+            \Coolsam\NestedComments\Filament\Widgets\CommentsWidget::class,
+        ];
+    }
 }

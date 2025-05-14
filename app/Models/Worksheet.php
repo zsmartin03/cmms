@@ -3,12 +3,16 @@
 namespace App\Models;
 
 use App\Enums\WorksheetPriority;
+use Coolsam\NestedComments\Concerns\HasComments;
+use Coolsam\NestedComments\Concerns\HasReactions;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Worksheet extends Model
 {
+    use HasComments;
+    use HasReactions;
     use HasFactory;
     protected $fillable = [
         'priority',
