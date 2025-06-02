@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Coolsam\NestedComments\Concerns\HasComments;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -15,10 +17,11 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements FilamentUser
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes, HasComments;
+
     public function canAccessPanel(Panel $panel): bool
     {
-        return str_ends_with($this->email, '@a.com');
+        return str_ends_with($this->email, '@admin.hu');
     }
 
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -66,5 +69,20 @@ class User extends Authenticatable implements FilamentUser
     public function repairers_worksheets(): HasMany
     {
         return $this->hasMany(Worksheet::class, 'repairer_id');
+    }
+
+    public function suggestions(): HasMany
+    {
+        return $this->hasMany(Suggestion::class, 'author_id');
+    }
+
+    public function assignedSuggestions(): HasMany
+    {
+        return $this->hasMany(Suggestion::class, 'assigned_to');
+    }
+
+    public function suggestionVotes(): HasMany
+    {
+        return $this->hasMany(SuggestionVote::class);
     }
 }

@@ -17,6 +17,12 @@ return [
 
         'plural_label' => 'Munkalapok',
     ],
+
+    'suggestions' => [
+        'label' => 'Javaslat',
+        'plural_label' => 'Javaslatok',
+    ],
+
     'device_types' => [
 
         'label' => 'Berendezés típus',

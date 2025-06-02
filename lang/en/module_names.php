@@ -13,7 +13,13 @@ return [
     ],
 
     'worksheets' => [
-        'label' => 'Label'
+        'label' => 'Worksheet',
+        'plural_label' => 'Worksheets',
+    ],
+
+    'suggestions' => [
+        'label' => 'Suggestion',
+        'plural_label' => 'Suggestions',
     ],
 
     'device_types' => [

@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Device;
 use App\Models\Document;
 use App\Models\DeviceType;
+use App\Models\Suggestion;
 use App\Models\Worksheet;
 use App\Policies\RolePolicy;
 use App\Policies\UserPolicy;
@@ -14,6 +15,7 @@ use App\Policies\DevicePolicy;
 use App\Policies\DocumentPolicy;
 use App\Policies\DeviceTypePolicy;
 use App\Policies\PermissionPolicy;
+use App\Policies\SuggestionPolicy;
 use App\Policies\WorksheetPolicy;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -36,6 +38,8 @@ class AuthServiceProvider extends ServiceProvider
         Document::class => DocumentPolicy::class,
 
         Worksheet::class => WorksheetPolicy::class,
+
+        Suggestion::class => SuggestionPolicy::class,
     ];
 
     /**

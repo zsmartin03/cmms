@@ -18,6 +18,8 @@ class AdministrationSeeder extends Seeder
     public function run(): void
     {
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+
+        // ÖSSZES PERMISSION LÉTREHOZÁSA
         // USER MODEL
         $userPermission1 = Permission::create(['name' => 'create users']);
         $userPermission2 = Permission::create(['name' => 'read users']);
@@ -48,13 +50,18 @@ class AdministrationSeeder extends Seeder
         $document2 = Permission::create(['name' => 'read documents']);
         $document3 = Permission::create(['name' => 'update documents']);
         $document4 = Permission::create(['name' => 'delete documents']);
-
         // WORKSHEET MODEL
         $worksheet1 = Permission::create(['name' => 'create worksheets']);
         $worksheet2 = Permission::create(['name' => 'read worksheets']);
         $worksheet3 = Permission::create(['name' => 'update worksheets']);
         $worksheet4 = Permission::create(['name' => 'delete worksheets']);
+        // SUGGESTION MODEL
+        $suggestion1 = Permission::create(['name' => 'create suggestions']);
+        $suggestion2 = Permission::create(['name' => 'read suggestions']);
+        $suggestion3 = Permission::create(['name' => 'update suggestions']);
+        $suggestion4 = Permission::create(['name' => 'delete suggestions']);
 
+        // SZEREPKÖRÖK LÉTREHOZÁSA
         $adminRole = Role::create(['name' => 'admin'])->syncPermissions([
             $userPermission1,
             $userPermission2,
@@ -80,49 +87,59 @@ class AdministrationSeeder extends Seeder
             $document2,
             $document3,
             $document4,
-
             $worksheet1,
             $worksheet2,
             $worksheet3,
             $worksheet4,
+            $suggestion1,
+            $suggestion2,
+            $suggestion3,
+            $suggestion4,
         ]);
+
         $repairerRole = Role::create(['name' => 'repairer'])->syncPermissions([
             $device2,
             $document2,
-
             $worksheet1,
             $worksheet2,
             $worksheet3,
             $worksheet4,
+            $suggestion1,
+            $suggestion2,
+            $suggestion3,
         ]);
+
         $operatorRole = Role::create(['name' => 'operator'])->syncPermissions([
             $device2,
             $document2,
-
-
             $worksheet1,
             $worksheet2,
             $worksheet3,
             $worksheet4,
+            $suggestion1,
+            $suggestion2,
         ]);
-        // CREATE ADMINS & USERS
+
+        // FELHASZNÁLÓK LÉTREHOZÁSA
         User::create([
             'name' => 'admin',
-            'email' => 'admin@a.com',
+            'email' => 'admin@admin.hu',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ])->assignRole($adminRole);
+
         User::create([
             'name' => 'repairer',
-            'email' => 'repairer@a.com',
+            'email' => 'repairer@admin.hu',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ])->assignRole($repairerRole);
+
         User::create([
             'name' => 'operator',
-            'email' => 'operator@a.com',
+            'email' => 'operator@admin.hu',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
