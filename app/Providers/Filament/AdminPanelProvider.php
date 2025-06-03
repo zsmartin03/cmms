@@ -17,6 +17,10 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
+use Filament\Navigation\MenuItem;
+use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
+
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -40,6 +44,15 @@ class AdminPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
             ])
+            ->plugins([
+                $this->getEditProfilePlugin(),
+            ])
+            ->userMenuItems([
+                'profile' => MenuItem::make()
+                    ->label(fn() => __('fields.my_profile'))
+                    ->url(fn(): string => EditProfilePage::getUrl())
+                    ->icon('heroicon-m-user-circle'),
+            ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -54,5 +67,17 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ]);
+    }
+    private function getEditProfilePlugin(): FilamentEditProfilePlugin
+    {
+        return FilamentEditProfilePlugin::make()
+            ->setTitle(fn() => __('fields.my_profile'))
+            ->setNavigationLabel(fn() => __('fields.my_profile'))
+            ->setNavigationGroup(fn() => __('module_names.navigation_groups.administration'))
+            ->setIcon('heroicon-o-user-circle')
+            ->setSort(10)
+            ->shouldShowAvatarForm()
+            ->shouldShowDeleteAccountForm(false)
+            ->shouldShowBrowserSessionsForm();
     }
 }

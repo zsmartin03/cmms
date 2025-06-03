@@ -28,7 +28,7 @@ return [
     'basic_information' => 'Alapvető információk',
     'title' => 'Cím',
     'author' => 'Szerző',
-    'assigned_to' => 'Hozzárendelve',
+    'assigned_to' => 'Felelős',
     'location' => 'Helyszín',
     'admin_notes' => 'Adminisztrátori megjegyzések',
     'resolved_at' => 'Megoldva',
@@ -51,5 +51,7 @@ return [
     'delete_selected_confirmation' => 'Kiválasztott javaslatok törlése',
     'delete_selected_confirmation_text' => 'Biztosan törölni szeretnéd a kiválasztott javaslatokat? Ez a művelet nem vonható vissza.',
     'deleted_successfully' => 'Sikeresen törölve',
-
+    'my_profile' => 'Profilom',
+    'edit_profile' => 'Profil szerkesztése',
+    'avatar' => 'Profilkép',
 ];

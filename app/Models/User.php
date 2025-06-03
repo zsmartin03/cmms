@@ -12,10 +12,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Filament\Panel;
 use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasAvatar;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Traits\HasRoles;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable implements FilamentUser, HasAvatar
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes, HasComments;
 
@@ -23,9 +25,6 @@ class User extends Authenticatable implements FilamentUser
     {
         return str_ends_with($this->email, '@admin.hu');
     }
-
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -36,7 +35,8 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
-        'new_password'
+        'new_password',
+        'avatar_url',
     ];
 
     /**
@@ -60,6 +60,11 @@ class User extends Authenticatable implements FilamentUser
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->avatar_url ? Storage::url($this->avatar_url) : null;
     }
 
     public function creators_worksheets(): HasMany

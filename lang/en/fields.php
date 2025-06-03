@@ -50,4 +50,7 @@ return [
     'delete_selected_confirmation' => 'Delete selected suggestions',
     'delete_selected_confirmation_text' => 'Are you sure you want to delete the selected suggestions? This action cannot be undone.',
     'deleted_successfully' => 'Successfully deleted',
+    'my_profile' => 'My Profile',
+    'edit_profile' => 'Edit Profile',
+    'avatar' => 'Avatar',
 ];

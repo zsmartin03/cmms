@@ -84,8 +84,21 @@ class SuggestionResource extends Resource
                                 $record->update(['resolved_at' => now()]);
                             }
                         })
-                        ->visible(fn($operation) => $operation === 'edit'),
-
+                        ->visible(function ($operation, $record) {
+                            // Csak admin és repairer láthatja edit módban
+                            if ($operation === 'edit') {
+                                return auth()->user()?->hasAnyRole(['admin', 'repairer']);
+                            }
+                            // Create módban senki nem látja (automatikusan SUBMITTED lesz)
+                            return false;
+                        })
+                        ->disabled(function ($operation) {
+                            // Extra védelem: ha valahogy mégis látható lenne, akkor is letiltva operator számára
+                            if ($operation === 'edit') {
+                                return !auth()->user()?->hasAnyRole(['admin', 'repairer']);
+                            }
+                            return false;
+                        }),
                     Forms\Components\Select::make('assigned_to')
                         ->label(__('fields.assigned_to'))
                         ->relationship('assignedTo', 'name')
@@ -185,7 +198,18 @@ class SuggestionResource extends Resource
                 Tables\Actions\EditAction::make()
                     ->iconButton()
                     ->tooltip(__('fields.edit'))
-                    ->visible(fn() => auth()->user()?->hasRole(['admin', 'repairer'])),
+                    ->visible(function ($record) {
+                        $user = auth()->user();
+                        if ($user?->hasAnyRole(['admin', 'repairer'])) {
+                            return true;
+                        }
+
+                        if ($user?->hasRole('operator') && $record) {
+                            return $record->author_id === $user->id;
+                        }
+
+                        return false;
+                    }),
                 Tables\Actions\DeleteAction::make()
                     ->iconButton()
                     ->tooltip(__('fields.delete'))
@@ -193,7 +217,23 @@ class SuggestionResource extends Resource
                     ->modalHeading(__('fields.delete_confirmation'))
                     ->modalDescription(__('fields.delete_confirmation_text'))
                     ->modalSubmitActionLabel(__('fields.delete'))
-                    ->successNotificationTitle(__('fields.deleted_successfully')),
+                    ->successNotificationTitle(__('fields.deleted_successfully'))
+                    ->visible(function ($record) {
+                        $user = auth()->user();
+
+                        // Admin mindig törölhet
+                        if ($user?->hasRole('admin')) {
+                            return true;
+                        }
+
+                        // Operator csak a saját, még "submitted" státuszú javaslatait törölheti
+                        if ($user?->hasRole('operator') && $record) {
+                            return $record->author_id === $user->id &&
+                                $record->status === \App\Enums\SuggestionStatus::SUBMITTED;
+                        }
+
+                        return false;
+                    }),
             ])
             ->defaultSort('created_at', 'desc')
             ->striped()

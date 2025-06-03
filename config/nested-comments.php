@@ -2,6 +2,7 @@
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 return [
     'tables' => [
@@ -37,12 +38,29 @@ return [
     'allow-guest-reactions' => env('ALLOW_GUEST_REACTIONS', false), // Allow guest users to react
     'allow-guest-comments' => env('ALLOW_GUEST_COMMENTS', false), // Allow guest users to comment
     'closures' => [
-        'getUserNameUsing' => fn (Authenticatable | Model $user) => $user->getAttribute('name'),
-        'getUserAvatarUsing' => fn (
-            Authenticatable | Model | string $user
-        ) => app(\Coolsam\NestedComments\NestedComments::class)->geDefaultUserAvatar($user),
-        //        'getMentionsUsing' => fn (string $query) => app(\Coolsam\NestedComments\NestedComments::class)->getUserMentions($query), // Get mentions of all users in the DB
-        'getMentionsUsing' => fn (
+        'getUserNameUsing' => fn(Authenticatable | Model $user) => $user->getAttribute('name'),
+        'getUserAvatarUsing' => function ($user) {
+            if (!is_object($user)) {
+                $foundUser = User::where('name', $user)->first();
+                if ($foundUser && method_exists($foundUser, 'getFilamentAvatarUrl')) {
+                    $url = $foundUser->getFilamentAvatarUrl();
+                    if ($url) {
+                        return $url;
+                    }
+                }
+            } elseif (method_exists($user, 'getFilamentAvatarUrl')) {
+                $url = $user->getFilamentAvatarUrl();
+                if ($url) {
+                    return $url;
+                }
+            }
+            $attr = method_exists($user, 'getAttribute') ? $user->getAttribute('avatar_url') : null;
+            if ($attr) {
+                return $attr;
+            }
+            return app(\Coolsam\NestedComments\NestedComments::class)->geDefaultUserAvatar($user);
+        },
+        'getMentionsUsing' => fn(
             string $query,
             Model $commentable
         ) => app(\Coolsam\NestedComments\NestedComments::class)->getCurrentThreadUsers($query, $commentable),

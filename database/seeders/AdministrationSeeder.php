@@ -107,6 +107,7 @@ class AdministrationSeeder extends Seeder
             $suggestion1,
             $suggestion2,
             $suggestion3,
+            $suggestion4,
         ]);
 
         $operatorRole = Role::create(['name' => 'operator'])->syncPermissions([
@@ -118,6 +119,8 @@ class AdministrationSeeder extends Seeder
             $worksheet4,
             $suggestion1,
             $suggestion2,
+            $suggestion3,
+            $suggestion4,
         ]);
 
         // FELHASZNÁLÓK LÉTREHOZÁSA
